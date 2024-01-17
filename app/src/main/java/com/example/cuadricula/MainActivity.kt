@@ -25,11 +25,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.cuadricula.data.DataSource
 import com.example.cuadricula.model.Topic
 import com.example.cuadricula.ui.theme.CuadriculaTheme
@@ -43,7 +42,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
-
+                    PantallaFinal()
                 }
             }
         }
@@ -62,31 +61,39 @@ fun PantallaFinal() {
 @SuppressLint("ResourceType")
 @Composable
 fun FormattedCard(topic: Topic, modifier: Modifier = Modifier) {
-    Card() {
+    Card {
         Row {
             Image(
                 painter = painterResource(topic.foto),
                 contentDescription = null,
                 modifier = Modifier
-                    .height(68.dp)
-                    .width(68.dp),
+                    .height(dimensionResource(R.dimen.ppading_68dp))
+                    .width(dimensionResource(R.dimen.ppading_68dp)),
                 contentScale = ContentScale.Crop
             )
-            Column(modifier = Modifier.padding(top = 16.dp, end = 16.dp)) {
+            Column(
+                modifier = Modifier.padding(
+                    top = (dimensionResource(R.dimen.ppading_16dp)),
+                    end = (dimensionResource(R.dimen.ppading_16dp))
+                )
+            ) {
                 Text(
                     text = LocalContext.current.getString(topic.stringResourceId),
-                    modifier = Modifier.padding(start = 16.dp, bottom = 8.dp),
+                    modifier = Modifier.padding(
+                        start = (dimensionResource(R.dimen.ppading_16dp)),
+                        bottom = (dimensionResource(R.dimen.ppading_8dp))
+                    ),
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_grain),
                         contentDescription = null,
-                        modifier = Modifier.padding(start = 16.dp)
+                        modifier = Modifier.padding(start = (dimensionResource(R.dimen.ppading_16dp)))
                     )
                     Text(
                         text = topic.vacantes.toString(),
-                        modifier = Modifier.padding(start = 8.dp),
+                        modifier = Modifier.padding(start = (dimensionResource(R.dimen.ppading_8dp))),
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }
@@ -97,18 +104,18 @@ fun FormattedCard(topic: Topic, modifier: Modifier = Modifier) {
 
 
 @Composable
-fun CardList(topicList: List<Topic>, modifier: Modifier) {
+fun CardList(topicList: List<Topic>) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        contentPadding = PaddingValues(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        contentPadding = PaddingValues(dimensionResource(R.dimen.ppading_8dp)),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.ppading_8dp)),
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.ppading_8dp))
     ) {
-        this.items(topicList) { FormattedCard(topic = it) }
+        this.items(topicList) { topic -> FormattedCard(topic = topic) }
     }
 }
 
 @Composable
 fun CardApp() {
-    CardList(topicList = DataSource().loadAffirmations(), modifier = Modifier)
+    CardList(topicList = DataSource.topic)
 }

@@ -4,10 +4,8 @@ import android.annotation.SuppressLint
 import com.example.cuadricula.R
 import com.example.cuadricula.model.Topic
 
-class DataSource() {
-    @SuppressLint("ResourceType")
-    fun loadAffirmations(): List<Topic> {
-        return listOf<Topic>(
+object DataSource {
+ val topic= listOf(
             Topic(R.string.architecture, 58, R.drawable.architecture),
             Topic(R.string.crafts, 121, R.drawable.crafts),
             Topic(R.string.business, 78, R.drawable.business),
@@ -24,4 +22,4 @@ class DataSource() {
             Topic(R.string.tech, 118, R.drawable.tech)
         )
     }
-}
+

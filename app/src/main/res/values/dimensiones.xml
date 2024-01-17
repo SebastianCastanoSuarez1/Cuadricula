@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="ppading_8dp">8dp</dimen>
+    <dimen name="ppading_16dp">16dp</dimen>
+    <dimen name="ppading_68dp">68dp</dimen>
+
+
+</resources>
